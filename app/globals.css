@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html { background: #fcfcfb; color: #1c1917; }
+body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; font-variant-caps: all-small-caps; text-transform: lowercase; color: #6b6560; }
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; padding: 0.55rem 1rem; font-size: 14px; font-weight: 600; background: #b45309; color: #fff; transition: background .12s; }
+.btn:hover { background: #92400e; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn-quiet { background: #fff; color: #1c1917; border: 1px solid #e4e2de; }
+.btn-quiet:hover { background: #f4f3f0; }
+.chip { display: inline-block; border-radius: 9999px; padding: 1px 10px; font-size: 12px; font-weight: 600; border: 1px solid; } /* unslop-ignore: spec mandates pills for status chips only */
+.chip-pass { color: #166534; border-color: #bbd8c4; background: #fff; }
+.chip-flag { color: #92400e; border-color: #e6c39a; background: #fff; }
+.chip-live { color: #166534; border-color: #bbd8c4; }
+.chip-old { color: #6b6560; border-color: #e4e2de; }
+.card { border: 1px solid #e4e2de; border-radius: 10px; background: #fff; }
+.inp { border: 1px solid #e4e2de; border-radius: 8px; padding: 0.4rem 0.6rem; font-size: 14px; background: #fff; }
+.th { text-align: left; padding: 8px 12px; border-bottom: 1px solid #e4e2de; }
+.td { padding: 8px 12px; border-bottom: 1px solid #efedea; }
+@media (max-width: 639px) {
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack thead { display: none; }
+  table.stack tr { border-bottom: 1px solid #e4e2de; padding: 8px 12px; }
+  table.stack td { border: 0; padding: 2px 0; display: flex; justify-content: space-between; gap: 12px; }
+  table.stack td::before { content: attr(data-l); color: #6b6560; font-size: 12px; }
+}

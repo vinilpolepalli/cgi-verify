@@ -1,0 +1,13 @@
+# Ground the calculator in the published methodology
+
+The exact CGI methodology is public at github.com/getcomputable/gpu-index (Apache-2.0). A copy of METHODOLOGY.md is saved at /tmp/cgi-methodology.md. The calculation code is in src/gpu_index/index/ (panel.py, weights.py, screens.py, composite.py) - fetch raw files from raw.githubusercontent.com/getcomputable/gpu-index/main/... as needed. READ it; do not execute their code.
+
+Also: Computable advertises an anonymous read-only REST API (https://api.getcomputable.com/v1/index/, latest value + source receipts + history) and a flat-file corpus (https://data.getcomputable.com/latest.json + dated archives). Evaluate switching the fetch path from the page flight-payload scrape to the official API/corpus: prefer the official published record if it supplies the full re-derivation inputs (receipts with smoothed votes, weights, attendance factors, calc_params). Keep the page scrape only as a cross-check or drop it with a note.
+
+## Required changes
+1. Read METHODOLOGY.md + the panel calculation code. Reimplement the ACTUAL published method in our engine (TypeScript, server-side), cited in code comments to the repo, the methodology_id (the page payload showed METHOD ID ANNEX_A_V0_2_CALC_V17), and the repo commit you read.
+2. Replace the assumed-primary estimator with the real method as the verification path. Keep the three candidate estimators only if useful, clearly labeled "exploratory candidates - not the published method", collapsed behind a details element.
+3. Recompute against the stored snapshot: if the published inputs (receipts incl. smoothed votes, liveness weights, attendance, calc_params) suffice, the recompute must match the published print exactly (or within float tolerance); if some input is genuinely not in the published payload/API, state exactly which input is unavailable and what that limits - distinguish precisely, no blanket "exact method unknown".
+4. Update the UI copy: methodology panel now cites the real method (repo + methodology id + commit). Pass/flag semantics: pass = our reimplementation of the published method reproduces the published print from published inputs; flag = it does not, with the precise reason (missing input vs numeric divergence). Keep all neutral framing from the previous correction - a divergence is still not an accusation; report the facts and the exact inputs used.
+5. Keep owner isolation, rate limits, scanner clean, light bronze UI. Rebuild, re-verify (fresh fetch if the rate limit allows, else work from the stored snapshot + the official API), update README + IMPLEMENTATION.md. Do not deploy or push.
+6. If the official API is adopted, keep the same strict fail-closed validation and politeness (serialize, one retry).
